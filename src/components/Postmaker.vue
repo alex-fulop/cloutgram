@@ -20,8 +20,10 @@
 export default {
   data() {
     return {
+      name: "Postmaker",
       input: "",
-      posts: []
+      posts: [],
+      id: 0
     };
   },
 
@@ -29,10 +31,21 @@ export default {
     post() {
       if (this.input != "") {
         this.posts.push({
+          id: this.id,
           body: this.input,
           avatar: "default.jpg",
-          author: "guest"
+          author: "guest",
+          reacts: {
+            like: 0,
+            love: 0,
+            haha: 0,
+            wow: 0,
+            sad: 0,
+            angry: 0,
+            count: 0
+          }
         });
+        this.id = this.id + 1;
         this.$emit("inputData", this.posts);
         this.input = "";
       }
@@ -43,8 +56,9 @@ export default {
 
 <style scoped>
 .btn-primary {
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   background: #fcd000;
+  border-radius: 1rem;
   border: none;
 }
 
@@ -52,8 +66,9 @@ export default {
   background: #daae00 !important;
 }
 .postmaker {
+  resize: none;
   position: relative;
-  top: 1rem;
+  top: 1.5rem;
   left: 4%;
   color: #fff;
   width: 92%;
@@ -70,7 +85,7 @@ export default {
 }
 
 .background {
-  height: 26vh;
+  height: 14rem;
   background: #333;
   border-radius: 1rem;
 }
